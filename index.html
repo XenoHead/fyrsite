@@ -1,0 +1,432 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forever Young Records | Grand Prairie, TX</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap">
+  <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Anton', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --cobalt-blue: #1A52B8;
+      --chrome-yellow: #FFD400;
+      --warehouse-dark: #1C1E21;
+      --crate-cream: #F5F3E9;
+      --text-dark: #2D3139;
+    }
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+    @keyframes tabIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans" style="background-color: var(--crate-cream); color: var(--text-dark);">
+
+  <header style="background-color: var(--cobalt-blue);" class="relative overflow-hidden border-b-4 border-[var(--chrome-yellow)]">
+    
+    <div class="absolute inset-0 opacity-[0.08] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%221%22/%3E%3C/svg%3E'); background-size: 200px 200px;"></div>
+
+    <div class="relative z-10 flex items-center justify-between px-4 md:px-10 py-2.5 border-b-4" style="border-color: var(--chrome-yellow); background-color: var(--warehouse-dark);">
+      <span class="text-xs md:text-sm font-bold tracking-widest uppercase" style="color: var(--chrome-yellow);">★ Grand Prairie, TX ★</span>
+      <span class="text-xs md:text-sm font-bold tracking-widest uppercase" style="color: var(--crate-cream);">Est. 1984 — Independently Owned</span>
+    </div>
+
+    <div class="relative z-10 px-4 md:px-10 py-10 text-center max-w-6xl mx-auto">
+      <p class="text-xs md:text-sm font-bold tracking-[0.35em] uppercase mb-4" style="color: var(--chrome-yellow);">★ The Largest Independent Record Store in DFW ★</p>
+      
+      <h1 class="font-display leading-none uppercase tracking-wide text-white drop-shadow-lg" style="font-size: clamp(2.2rem, 7.5vw, 5.5rem); text-shadow: 4px 4px 0px var(--warehouse-dark);">
+        FOREVER YOUNG <span style="color: var(--chrome-yellow);">RECORDS</span>
+      </h1>
+      
+      <p class="mt-4 font-bold tracking-[0.2em] uppercase text-xs md:text-base text-white/90">
+        Vinyl · Cassettes · CDs · Merch · Memorabilia
+      </p>
+
+      <div id="status-banner" class="mt-6 inline-flex items-center gap-3 px-5 py-2.5 border-2 rounded-full transition-all duration-300" style="border-color: var(--chrome-yellow); background-color: var(--warehouse-dark);">
+        <span id="status-dot" class="block w-2.5 h-2.5 rounded-full flex-shrink-0 animate-[statusPulse_1.4s_ease-in-out_infinite]" style="background-color: var(--chrome-yellow);"></span>
+        <span id="status-text" class="font-bold text-xs uppercase tracking-widest" style="color: var(--chrome-yellow);">Checking store operational status…</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sticky top-0 z-50 border-b-4" style="background-color: var(--warehouse-dark); border-color: var(--chrome-yellow);">
+    <div class="flex overflow-x-auto custom-scrollbar max-w-6xl mx-auto" role="tablist">
+      <button onclick="switchTab('home')" id="tab-home" role="tab" aria-selected="true"
+        class="flex-1 min-w-[7rem] px-6 py-4 font-display text-sm md:text-lg uppercase tracking-widest transition-all duration-150 cursor-pointer border-b-4 border-transparent text-white hover:text-[var(--chrome-yellow)]">
+        ▶ Home
+      </button>
+      <button onclick="switchTab('search')" id="tab-search" role="tab" aria-selected="false"
+        class="flex-1 min-w-[8rem] px-6 py-4 font-display text-sm md:text-lg uppercase tracking-widest transition-all duration-150 cursor-pointer border-b-4 border-transparent text-white hover:text-[var(--chrome-yellow)]">
+        ◈ Search Crates
+      </button>
+      <button onclick="switchTab('aisle')" id="tab-aisle" role="tab" aria-selected="false"
+        class="flex-1 min-w-[8rem] px-6 py-4 font-display text-sm md:text-lg uppercase tracking-widest transition-all duration-150 cursor-pointer border-b-4 border-transparent text-white hover:text-[var(--chrome-yellow)]">
+        ⊞ Aisle Finder
+      </button>
+      <button onclick="switchTab('hub')" id="tab-hub" role="tab" aria-selected="false"
+        class="flex-1 min-w-[7rem] px-6 py-4 font-display text-sm md:text-lg uppercase tracking-widest transition-all duration-150 cursor-pointer border-b-4 border-transparent text-white hover:text-[var(--chrome-yellow)]">
+        ◉ The Hub
+      </button>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto">
+
+    <section id="section-home" class="tab-section animate-[tabIn_0.2s_ease_both]">
+      
+      <div class="relative overflow-hidden border-b-4" style="border-color: var(--cobalt-blue);">
+        <img src="https://preview.webstudio.ai/cgi/image/dev/b6624bfefa3cdfaaa65eee309d49d23cd5eeb9a6cca0e938db8f29a75e09365b.jpg?width=1200&height=496&format=auto" width="1200" height="496" alt="Vintage jukebox in a record store interior" class="w-full object-cover" style="max-height: 480px; filter: saturate(0.85) contrast(1.05);">
+        
+        <div class="absolute inset-0" style="background: linear-gradient(90deg, rgba(28,30,33,0.9) 0%, rgba(28,30,33,0.5) 45%, transparent 100%);"></div>
+        
+        <div class="absolute inset-0 flex flex-col justify-center p-6 md:p-16 max-w-2xl">
+          <p class="text-xs font-bold tracking-[0.3em] uppercase mb-2" style="color: var(--chrome-yellow);">★ Now Spinning ★</p>
+          <h2 class="font-display uppercase leading-none text-white mb-4" style="font-size: clamp(2rem, 5.5vw, 4rem);">
+            Over 100,000<br>Titles In Stock
+          </h2>
+          <p class="text-sm md:text-base font-medium text-gray-200 leading-relaxed mb-6">
+            Vinyl · Cassettes · CDs · VHS · Memorabilia · Merch.<br>Come dig the massive physical warehouse pipeline in Grand Prairie.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button onclick="switchTab('search')" class="px-6 py-3.5 font-display text-sm md:text-base uppercase tracking-widest cursor-pointer border-4 transition-all" style="background-color: var(--chrome-yellow); color: var(--warehouse-dark); border-color: var(--warehouse-dark);">
+              ◈ Search Crates
+            </button>
+            <button onclick="switchTab('aisle')" class="px-6 py-3.5 font-display text-sm md:text-base uppercase tracking-widest cursor-pointer border-4 transition-all text-white bg-transparent border-white hover:bg-white/10">
+              ⊞ Find My Aisle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-b-4 relative overflow-hidden" style="border-color: var(--warehouse-dark);">
+        <img src="https://preview.webstudio.ai/cgi/image/dev/c9db6c9623de3950c2048f85f13435ec37418bf04a54434e4aa7f91f9e7bfb8e.jpg?width=896&height=400&format=auto" width="896" height="400" alt="Record store crates interior" class="w-full object-cover" style="max-height: 200px; filter: saturate(0.75) brightness(0.9);">
+        <div class="absolute inset-0 flex items-center justify-center" style="background: rgba(28,30,33,0.6);">
+          <p class="font-display text-center uppercase tracking-widest px-4" style="font-size: clamp(1.1rem, 3.5vw, 2.2rem); color: var(--chrome-yellow); text-shadow: 2px 2px 0 var(--warehouse-dark);">Every Visit Hits Different · Dig Deep</p>
+        </div>
+      </div>
+
+      <div class="px-4 md:px-10 py-12">
+        
+        <div class="flex items-center gap-4 mb-8 border-b-4 pb-2" style="border-color: var(--cobalt-blue);">
+          <div class="px-6 py-3.5 font-display text-lg md:text-2xl uppercase tracking-widest rounded-t-sm" style="background-color: var(--cobalt-blue); color: var(--chrome-yellow);">
+            📦 Freshly Crated Today
+          </div>
+          <div class="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-500 hidden sm:block">
+            — New used arrivals and imports just dropped onto the storefront floor
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+
+          <article class="border-4 flex flex-col overflow-hidden group transition-all" style="border-color: var(--cobalt-blue); background: #FFF;">
+            <div class="relative overflow-hidden">
+              <img src="https://preview.webstudio.ai/cgi/image/dev/160f569890c10796c89e2c1557587f36379f80edbb4b98d1d6281c6b3bb3ac67.jpg?width=288&height=288&format=auto" width="288" height="288" alt="Vinyl LP album art" class="w-full object-cover aspect-square transition-transform duration-300 group-hover:scale-105">
+              <span class="absolute top-0 left-0 font-display text-xs px-3 py-1.5 uppercase tracking-wider" style="background-color: var(--cobalt-blue); color: var(--chrome-yellow);">LP</span>
+            </div>
+            <div class="p-4 flex-1 flex flex-col gap-1">
+              <p class="font-display text-sm md:text-lg uppercase leading-tight text-slate-800">Cosmic Traveler</p>
+              <p class="text-xs font-bold uppercase tracking-wide" style="color: var(--cobalt-blue);">The Stellar Band</p>
+              <p class="text-xs md:text-sm font-bold mt-auto pt-3 border-t-2 border-dashed" style="color: var(--text-dark); border-color: var(--chrome-yellow);">$14.99 · VG+</p>
+            </div>
+          </article>
+
+          <article class="border-4 flex flex-col overflow-hidden group transition-all" style="border-color: var(--cobalt-blue); background: #FFF;">
+            <div class="relative overflow-hidden">
+              <img src="https://preview.webstudio.ai/cgi/image/dev/3add1c72aa2fe8c7fa4243f9afac11381d055dfde1027c796e5bad0ef0982ecc.jpg?width=288&height=288&format=auto" width="288" height="288" alt="Cassette album art" class="w-full object-cover aspect-square transition-transform duration-300 group-hover:scale-105">
+              <span class="absolute top-0 left-0 font-display text-xs px-3 py-1.5 uppercase tracking-wider text-white" style="background-color: var(--warehouse-dark);">CASS</span>
+            </div>
+            <div class="p-4 flex-1 flex flex-col gap-1">
+              <p class="font-display text-sm md:text-lg uppercase leading-tight text-slate-800">Street Static</p>
+              <p class="text-xs font-bold uppercase tracking-wide" style="color: var(--cobalt-blue);">Raw Nerve</p>
+              <p class="text-xs md:text-sm font-bold mt-auto pt-3 border-t-2 border-dashed" style="color: var(--text-dark); border-color: var(--chrome-yellow);">$4.99 · EX</p>
+            </div>
+          </article>
+
+          <article class="border-4 flex flex-col overflow-hidden group transition-all" style="border-color: var(--cobalt-blue); background: #FFF;">
+            <div class="relative overflow-hidden">
+              <img src="https://preview.webstudio.ai/cgi/image/dev/89f3fa50961929819e3a6dfdc00411723a60727c71b94e68e1e20c112dd25163.jpg?width=288&height=288&format=auto" width="288" height="288" alt="CD album art" class="w-full object-cover aspect-square transition-transform duration-300 group-hover:scale-105">
+              <span class="absolute top-0 left-0 font-display text-xs px-3 py-1.5 uppercase tracking-wider" style="background-color: var(--chrome-yellow); color: var(--warehouse-dark);">CD</span>
+            </div>
+            <div class="p-4 flex-1 flex flex-col gap-1">
+              <p class="font-display text-sm md:text-lg uppercase leading-tight text-slate-800">Gravel & Glass</p>
+              <p class="text-xs font-bold uppercase tracking-wide" style="color: var(--cobalt-blue);">Iron Pavement</p>
+              <p class="text-xs md:text-sm font-bold mt-auto pt-3 border-t-2 border-dashed" style="color: var(--text-dark); border-color: var(--chrome-yellow);">$6.99 · NM</p>
+            </div>
+          </article>
+
+          <article class="border-4 flex flex-col overflow-hidden group transition-all" style="border-color: var(--cobalt-blue); background: #FFF;">
+            <div class="relative overflow-hidden">
+              <img src="https://preview.webstudio.ai/cgi/image/dev/c1f043942edc3aaee91c01b309c762473440348deba5ab12892313eb69541e0a.jpg?width=288&height=288&format=auto" width="288" height="288" alt="Soul LP album art" class="w-full object-cover aspect-square transition-transform duration-300 group-hover:scale-105">
+              <span class="absolute top-0 left-0 font-display text-xs px-3 py-1.5 uppercase tracking-wider" style="background-color: var(--cobalt-blue); color: var(--chrome-yellow);">LP</span>
+            </div>
+            <div class="p-4 flex-1 flex flex-col gap-1">
+              <p class="font-display text-sm md:text-lg uppercase leading-tight text-slate-800">Soul Kitchen Vol. 3</p>
+              <p class="text-xs font-bold uppercase tracking-wide" style="color: var(--cobalt-blue);">Velvet Groove</p>
+              <p class="text-xs md:text-sm font-bold mt-auto pt-3 border-t-2 border-dashed" style="color: var(--text-dark); border-color: var(--chrome-yellow);">$18.99 · M</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-10 border-t-4 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" style="border-color: var(--cobalt-blue);">
+          <p class="font-bold text-sm uppercase tracking-wider text-slate-600">Showing sample profile fields. Database integration updates stock in real-time.</p>
+          <button onclick="switchTab('search')" class="px-6 py-3 font-display text-sm uppercase tracking-widest cursor-pointer border-4 text-white transition-all border-[var(--warehouse-dark)] bg-[var(--cobalt-blue)] hover:brightness-110">
+            Browse All Crates →
+          </button>
+        </div>
+      </div>
+
+      <div class="border-t-4 border-b-4 px-4 py-3 flex flex-wrap gap-x-8 gap-y-2 items-center justify-center text-xs font-bold uppercase tracking-widest" style="background-color: var(--warehouse-dark); border-color: var(--chrome-yellow); color: var(--chrome-yellow);">
+        <span>★ Vinyl LPs</span><span>★ Cassettes</span><span>★ Compact Discs</span><span>★ VHS Media</span><span>★ Concert Tees</span><span>★ Original Posters</span><span>★ Live Memorabilia</span>
+      </div>
+    </section>
+
+    <section id="section-search" class="tab-section hidden animate-[tabIn_0.2s_ease_both]">
+      <div class="border-b-4" style="border-color: var(--cobalt-blue); background-color: var(--cobalt-blue);">
+        <div class="px-4 md:px-10 py-10">
+          <p class="font-display text-xs md:text-sm uppercase tracking-[0.3em] mb-2" style="color: var(--chrome-yellow);">◈ Lightning Search</p>
+          <h2 class="font-display uppercase leading-none text-white mb-6" style="font-size: clamp(1.8rem, 5vw, 3.5rem);">Search the Crates</h2>
+          
+          <div class="flex flex-col sm:flex-row border-4 max-w-4xl overflow-hidden" style="border-color: var(--chrome-yellow); background-color: var(--warehouse-dark);">
+            <input type="search" id="crate-search" placeholder="Search by Artist, Album title, Genre, or Label…" class="flex-1 px-5 py-4 text-base font-semibold outline-none bg-transparent text-[var(--chrome-yellow)] placeholder-yellow-600/60">
+            <button class="px-8 py-4 font-display text-base uppercase tracking-widest whitespace-nowrap cursor-pointer border-t-4 sm:border-t-0 sm:border-l-4" style="background-color: var(--chrome-yellow); color: var(--warehouse-dark); border-color: var(--chrome-yellow);">
+              ▶ Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-4 md:px-10 py-5 flex flex-wrap gap-2.5 border-b-4" style="border-color: var(--warehouse-dark);">
+        <button class="px-4 py-2 font-display text-xs uppercase tracking-widest border-4 bg-[var(--warehouse-dark)] text-[var(--chrome-yellow)] border-[var(--warehouse-dark)]">ALL STOCK</button>
+        <button class="px-4 py-2 font-display text-xs uppercase tracking-widest border-4 bg-transparent text-[var(--cobalt-blue)] border-[var(--cobalt-blue)] hover:bg-[var(--cobalt-blue)] hover:text-white transition-all">Vinyl LP</button>
+        <button class="px-4 py-2 font-display text-xs uppercase tracking-widest border-4 bg-transparent text-[var(--cobalt-blue)] border-[var(--cobalt-blue)] hover:bg-[var(--cobalt-blue)] hover:text-white transition-all">Cassette</button>
+        <button class="px-4 py-2 font-display text-xs uppercase tracking-widest border-4 bg-transparent text-[var(--cobalt-blue)] border-[var(--cobalt-blue)] hover:bg-[var(--cobalt-blue)] hover:text-white transition-all">Compact Disc</button>
+        <button class="px-4 py-2 font-display text-xs uppercase tracking-widest border-4 bg-transparent text-[var(--cobalt-blue)] border-[var(--cobalt-blue)] hover:bg-[var(--cobalt-blue)] hover:text-white transition-all">7" 45 RPM</button>
+        <button class="px-4 py-2 font-display text-xs uppercase tracking-widest border-4 bg-transparent text-[var(--cobalt-blue)] border-[var(--cobalt-blue)] hover:bg-[var(--cobalt-blue)] hover:text-white transition-all">Memorabilia</button>
+      </div>
+
+      <div class="px-4 md:px-10 py-16 flex flex-col items-center justify-center">
+        <div id="search-results-grid" class="w-full grid grid-cols-2 md:grid-cols-6 gap-4 mb-10 opacity-25 pointer-events-none">
+          <div class="aspect-square border-4 border-[var(--cobalt-blue)] bg-slate-300"></div>
+          <div class="aspect-square border-4 border-[var(--cobalt-blue)] bg-slate-300"></div>
+          <div class="aspect-square border-4 border-[var(--cobalt-blue)] bg-slate-300"></div>
+          <div class="aspect-square border-4 border-[var(--cobalt-blue)] bg-slate-300"></div>
+          <div class="aspect-square border-4 border-[var(--cobalt-blue)] bg-slate-300 hidden md:block"></div>
+          <div class="aspect-square border-4 border-[var(--cobalt-blue)] bg-slate-300 hidden md:block"></div>
+        </div>
+        <div class="text-center border-4 px-8 py-10 max-w-md bg-white border-[var(--cobalt-blue)] shadow-md">
+          <p class="font-display text-2xl uppercase mb-2" style="color: var(--cobalt-blue);">◈ System Dynamic Readied</p>
+          <p class="text-sm font-semibold text-slate-600">The database structure is primed. Connecting your local Supabase token will turn this vector space into a real-time live search interface.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-aisle" class="tab-section hidden animate-[tabIn_0.2s_ease_both]">
+      <div class="border-b-4" style="border-color: var(--cobalt-blue); background-color: var(--warehouse-dark);">
+        <div class="px-4 md:px-10 py-8">
+          <p class="font-display text-xs uppercase tracking-[0.3em] mb-1" style="color: var(--chrome-yellow);">⊞ INTERACTIVE STOREFRONT GUIDE</p>
+          <h2 class="font-display uppercase text-white" style="font-size: clamp(1.8rem, 4.5vw, 3.2rem);">Find Your Aisle</h2>
+          <p class="text-sm font-semibold text-gray-400 mt-1">Locate genres across the physical retail warehouse floor in real-time.</p>
+        </div>
+      </div>
+
+      <div class="px-4 md:px-10 py-10">
+        <div class="border-4 p-4 md:p-8 overflow-x-auto bg-white border-[var(--cobalt-blue)] shadow-md">
+          <p class="font-display text-xs uppercase tracking-widest mb-6" style="color: var(--cobalt-blue);">⊞ FLOOR PLAN ARCHITECTURE — WAREHOUSE DATA</p>
+
+          <svg viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-3xl mx-auto block" style="font-family: Anton, sans-serif; min-width: 340px;">
+            <rect x="10" y="10" width="700" height="440" fill="#F5F3E9" stroke="#1C1E21" stroke-width="5"/>
+            <rect x="310" y="430" width="100" height="20" fill="#FFD400" stroke="#1C1E21" stroke-width="2"/>
+            <text x="360" y="445" text-anchor="middle" font-size="11" fill="#1C1E21" font-weight="bold">ENTRANCE</text>
+            <rect x="260" y="380" width="200" height="35" fill="#1A52B8" stroke="#1C1E21" stroke-width="2"/>
+            <text x="360" y="402" text-anchor="middle" font-size="13" fill="#FFD400" letter-spacing="2">CHECKOUT</text>
+            <rect x="570" y="370" width="110" height="55" fill="#1C1E21" stroke="#FFD400" stroke-width="2"/>
+            <text x="625" y="390" text-anchor="middle" font-size="10" fill="#FFD400">🎧 LISTENING</text>
+            <text x="625" y="408" text-anchor="middle" font-size="10" fill="#FFD400">STATION</text>
+            
+            <rect x="40" y="40" width="90" height="300" fill="#1A52B8" stroke="#1C1E21" stroke-width="3"/>
+            <text x="85" y="100" text-anchor="middle" font-size="18" fill="#FFD400">A</text>
+            <text x="85" y="118" text-anchor="middle" font-size="9" fill="#fff">ROCK</text>
+            <text x="85" y="131" text-anchor="middle" font-size="9" fill="#fff">METAL</text>
+
+            <rect x="150" y="40" width="90" height="300" fill="#1A52B8" stroke="#1C1E21" stroke-width="3"/>
+            <text x="195" y="100" text-anchor="middle" font-size="18" fill="#FFD400">B</text>
+            <text x="195" y="118" text-anchor="middle" font-size="9" fill="#fff">POP</text>
+            <text x="195" y="131" text-anchor="middle" font-size="9" fill="#fff">R&amp;B / SOUL</text>
+
+            <rect x="260" y="40" width="90" height="300" fill="#1A52B8" stroke="#1C1E21" stroke-width="3"/>
+            <text x="305" y="100" text-anchor="middle" font-size="18" fill="#FFD400">C</text>
+            <text x="305" y="118" text-anchor="middle" font-size="9" fill="#fff">HIP HOP</text>
+            <text x="305" y="131" text-anchor="middle" font-size="9" fill="#fff">RAP</text>
+
+            <rect x="370" y="40" width="90" height="300" fill="#1A52B8" stroke="#1C1E21" stroke-width="3"/>
+            <text x="415" y="100" text-anchor="middle" font-size="18" fill="#FFD400">D</text>
+            <text x="415" y="118" text-anchor="middle" font-size="9" fill="#fff">JAZZ</text>
+            <text x="415" y="131" text-anchor="middle" font-size="9" fill="#fff">BLUES</text>
+
+            <rect x="480" y="40" width="90" height="300" fill="#1A52B8" stroke="#1C1E21" stroke-width="3"/>
+            <text x="525" y="100" text-anchor="middle" font-size="18" fill="#FFD400">E</text>
+            <text x="525" y="118" text-anchor="middle" font-size="9" fill="#fff">COUNTRY</text>
+            <text x="525" y="131" text-anchor="middle" font-size="9" fill="#fff">FOLK</text>
+
+            <rect x="590" y="40" width="100" height="300" fill="#FFD400" stroke="#1C1E21" stroke-width="3"/>
+            <text x="640" y="100" text-anchor="middle" font-size="18" fill="#1C1E21">F</text>
+            <text x="640" y="118" text-anchor="middle" font-size="9" fill="#1C1E21">CASSETTES</text>
+            <text x="640" y="131" text-anchor="middle" font-size="9" fill="#1C1E21">CDs / VHS</text>
+
+            <rect x="40" y="355" width="200" height="30" fill="#1C1E21" stroke="#FFD400" stroke-width="2"/>
+            <text x="140" y="375" text-anchor="middle" font-size="11" fill="#FFD400" letter-spacing="2">★ MERCH WALL</text>
+            <rect x="40" y="395" width="200" height="30" fill="#FFD400" stroke="#1C1E21" stroke-width="2"/>
+            <text x="140" y="415" text-anchor="middle" font-size="11" fill="#1C1E21" letter-spacing="2">📦 NEW ARRIVALS BIN</text>
+            <text x="360" y="30" text-anchor="middle" font-size="11" fill="#1C1E21" letter-spacing="3" opacity="0.4">↑ NORTH WALL</text>
+          </svg>
+
+          <div class="mt-6 flex flex-wrap gap-4 pt-4 border-t border-slate-200">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 border-2 block" style="background-color: var(--cobalt-blue); border-color: var(--warehouse-dark);"></span>
+              <span class="text-xs font-bold uppercase tracking-wider">Vinyl Display Arrays</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 border-2 block" style="background-color: var(--chrome-yellow); border-color: var(--warehouse-dark);"></span>
+              <span class="text-xs font-bold uppercase tracking-wider">Compact Disc / Tape Crate Assemblies</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-hub" class="tab-section hidden animate-[tabIn_0.2s_ease_both]">
+      <div class="border-b-4 px-4 md:px-10 py-8" style="background-color: var(--warehouse-dark); border-color: var(--chrome-yellow);">
+        <p class="font-display text-xs uppercase tracking-[0.3em] mb-1" style="color: var(--chrome-yellow);">◉ Corporate Hub Operations</p>
+        <h2 class="font-display uppercase text-white" style="font-size: clamp(1.8rem, 4.5vw, 3.2rem);">Store Details & Logistics</h2>
+      </div>
+
+      <div class="px-4 md:px-10 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="border-4 p-6 bg-white border-[var(--cobalt-blue)] shadow-md">
+          <p class="font-display text-lg uppercase tracking-widest mb-4 border-b-4 pb-2 border-[var(--chrome-yellow)]" style="color: var(--cobalt-blue);">⏱ Store Hours</p>
+          <ul class="space-y-2.5 text-sm font-semibold">
+            <li class="flex justify-between border-b pb-1"><span>Monday – Thursday</span><span style="color: var(--cobalt-blue);">11AM – 8PM</span></li>
+            <li class="flex justify-between border-b pb-1"><span>Friday</span><span style="color: var(--cobalt-blue);">11AM – 9PM</span></li>
+            <li class="flex justify-between border-b pb-1"><span>Saturday</span><span style="color: var(--cobalt-blue);">10AM – 9PM</span></li>
+            <li class="flex justify-between pb-1"><span>Sunday</span><span style="color: var(--cobalt-blue);">12PM – 6PM</span></li>
+          </ul>
+        </div>
+
+        <div class="border-4 p-6 bg-white border-[var(--cobalt-blue)] shadow-md">
+          <p class="font-display text-lg uppercase tracking-widest mb-4 border-b-4 pb-2 border-[var(--chrome-yellow)]" style="color: var(--cobalt-blue);">📍 Location Grid</p>
+          <address class="not-italic text-sm font-semibold space-y-1">
+            <p class="font-display text-base" style="color: var(--warehouse-dark);">Forever Young Records</p>
+            <p>Grand Prairie, TX</p>
+            <p>Dallas–Fort Worth Metroplex Corridor</p>
+          </address>
+        </div>
+
+        <div class="border-4 p-6 bg-white border-[var(--cobalt-blue)] shadow-md">
+          <p class="font-display text-lg uppercase tracking-widest mb-4 border-b-4 pb-2 border-[var(--chrome-yellow)]" style="color: var(--cobalt-blue);">★ Crate Statement</p>
+          <p class="text-xs md:text-sm font-medium leading-relaxed text-slate-600">
+            Independent physical music stronghold hosting over 100,000 deep catalog assets across diverse legacy analog formats. Built explicitly for alternative collectors.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mt-12 px-4 md:px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-4 border-t-4" style="background-color: var(--warehouse-dark); border-color: var(--chrome-yellow);">
+    <p class="font-display text-sm md:text-lg uppercase tracking-widest" style="color: var(--chrome-yellow);">★ Forever Young Records Warehouse Systems ★</p>
+    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500">© 2026 Forever Young Records. Open Source Stack Architecture.</p>
+  </footer>
+
+  <script>
+    const TABS = ['home', 'search', 'aisle', 'hub'];
+
+    function switchTab(name) {
+      TABS.forEach(function(id) {
+        const section = document.getElementById('section-' + id);
+        const tab = document.getElementById('tab-' + id);
+        
+        if (id === name) {
+          section.classList.remove('hidden');
+          
+          // Re-evaluate background highlight vectors organically via JavaScript class injection
+          tab.style.backgroundColor = 'var(--chrome-yellow)';
+          tab.style.color = 'var(--warehouse-dark)';
+          tab.setAttribute('aria-selected', 'true');
+          tab.style.borderBottomColor = 'var(--warehouse-dark)';
+        } else {
+          section.classList.add('hidden');
+          tab.style.backgroundColor = 'transparent';
+          tab.style.color = '#fff';
+          tab.setAttribute('aria-selected', 'false');
+          tab.style.borderBottomColor = 'transparent';
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Run tab initialize sequence
+    switchTab('home');
+
+    // Operational Hours Status Computation Loop
+    (function() {
+      const dot = document.getElementById('status-dot');
+      const text = document.getElementById('status-text');
+      const banner = document.getElementById('status-banner');
+      
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours();
+      
+      const openRanges = {
+        0: [12, 18], 1: [11, 20], 2: [11, 20], 3: [11, 20],
+        4: [11, 20], 5: [11, 21], 6: [10, 21]
+      };
+
+      setTimeout(function() {
+        const range = openRanges[day];
+        const isOpen = hour >= range[0] && hour < range[1];
+        
+        if (isOpen) {
+          dot.style.backgroundColor = '#22c55e';
+          text.textContent = '● OPEN NOW — Come dig the crates!';
+          text.style.color = '#22c55e';
+          banner.style.borderColor = '#22c55e';
+        } else {
+          dot.style.backgroundColor = '#ef4444';
+          dot.style.animation = 'none';
+          text.textContent = '● CLOSED — Store opening schedules stand in Hub';
+          text.style.color = '#ef4444';
+          banner.style.borderColor = '#ef4444';
+        }
+      }, 1200);
+    })();
+  </script>
+</body>
+</html>
+
+```
