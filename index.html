@@ -263,6 +263,34 @@
       color: var(--yellow);
     }
 
+    .front-store-info {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .front-store-info p {
+      margin: 0;
+      color: var(--cream);
+      text-shadow: none !important;
+      line-height: 1.5;
+    }
+    .front-store-info strong {
+      color: var(--yellow);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
     /* =========================
     BOTTOM BAR
     ========================= */
@@ -394,6 +422,7 @@
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="buying-hours.html">Buying Hours</a>
+        <a href="location.html">Location</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
@@ -412,15 +441,17 @@
         and generations of American sound.
       </p>
       <div class="hero-buttons">
-        <a href="#" class="button primary">Explore Collection</a>
-        <a href="#" class="button">Visit The Store</a>
+        <a href="#" class="button primary" style="padding: 1.2rem 2.5rem; font-size: 1.1rem;">Search For Music To Buy</a>
       </div>
       <div class="feature-nav">
-        <a href="buying-hours.html" class="feature-link">BUYING HOURS</a>
         <a href="#" class="feature-link">AISLE GPS</a>
         <a href="#" class="feature-link">CRATE DIGGING</a>
-        <a href="#" class="feature-link">MUSIC SEARCH</a>
-        <a href="about.html" class="feature-link">ABOUT</a>
+      </div>
+
+      <div class="front-store-info">
+        <p>2955 S State Hwy 161, Grand Prairie, TX 75052</p>
+        <p><strong>Phone:</strong> (972) 260-9899</p>
+        <p><strong>Store Hours:</strong> Mon-Thu 10am-7pm &nbsp;|&nbsp; Fri-Sat 10am-9pm &nbsp;|&nbsp; Sun 12pm-6pm</p>
       </div>
     </div>
 

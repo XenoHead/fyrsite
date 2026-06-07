@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buying Hours | Forever Young Records</title>
+  <title>Location | Forever Young Records</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -50,26 +50,26 @@
     .nav-links a:hover { color: var(--yellow); text-shadow: 0 0 10px rgba(255, 212, 71, 0.4); }
     .nav-links a:hover::after { width: 100%; }
 
-    /* Vinyl Sidebar - Reusing pancake image! */
+    /* Vinyl Sidebar */
     .vinyl-sidebar {
       position: fixed;
       top: 0;
       right: 0;
       width: 280px;
       height: 100vh;
-      background-image: url('vinyl-pancake.jpg');
+      background-image: url('record-row.jpg');
       background-size: cover;
       background-position: right center;
-      opacity: 0.85;
+      opacity: 0.6;
       z-index: 0;
       filter: saturate(1.2) contrast(1.2) brightness(0.6);
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 75%);
       mask-image: linear-gradient(to right, transparent 0%, black 75%);
     }
 
-    /* About/Buying Specific Styles */
+    /* Location Specific Styles */
     .about-header {
-      padding: 150px 2rem 4rem;
+      padding: 150px 2rem 2rem;
       text-align: center;
       background: linear-gradient(to bottom, rgba(10, 44, 116, 0.2), transparent);
     }
@@ -89,12 +89,14 @@
     }
 
     .about-content {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto 6rem;
       padding: 0 2rem;
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      position: relative;
+      z-index: 2;
     }
 
     .about-block {
@@ -104,35 +106,16 @@
       padding: 2rem;
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
-
-    .about-block h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.8rem;
-      color: var(--yellow);
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .about-block p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      color: var(--cream);
-    }
-    .about-block p:last-child {
-      margin-bottom: 0;
-    }
-
-    .about-image img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      object-position: center 30%;
-      filter: contrast(1.1);
-      border-radius: 12px;
-    }
     
+    .map-container iframe {
+      width: 100%;
+      height: 500px;
+      border: 0;
+      border-radius: 12px;
+      filter: invert(90%) hue-rotate(180deg) brightness(1.1) contrast(1.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
     @media(max-width:900px) {
       .vinyl-sidebar { width: 140px; opacity: 0.3; }
       .nav-links { display: none; }
@@ -150,8 +133,8 @@
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="buying-hours.html" style="color: var(--yellow);">Buying Hours</a>
-        <a href="location.html">Location</a>
+        <a href="buying-hours.html">Buying Hours</a>
+        <a href="location.html" style="color: var(--yellow);">Location</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
@@ -159,40 +142,13 @@
   </nav>
 
   <header class="about-header">
-    <h1>Buying Hours</h1>
-    <p class="subtitle">Turn your collection into cash. We buy vinyl, CDs, cassettes, and memorabilia.</p>
+    <h1>Location</h1>
+    <p class="subtitle">2955 S State Hwy 161, Grand Prairie, TX 75052</p>
   </header>
 
   <main class="about-content">
-    <div class="about-block">
-      <h2>When To Visit</h2>
-      <p>Our buyers are actively assessing collections during the following hours:</p>
-      <p><strong>Mon, Weds, Fri:</strong> 10:00 AM - 1:00 PM</p>
-      <p style="color: var(--yellow); font-weight: 600; font-size: 1.15rem; margin-top: 0.5rem; letter-spacing: 1px;">Ask for Dave!</p>
-      <p><em>Got a massive collection (1,000+ items)?</em> We can schedule house calls! Please <a href="contact.html" style="color: var(--yellow);">contact us</a> to arrange a private appointment with our lead buyer.</p>
-    </div>
-
-    <div class="about-block">
-      <h2>We Buy Music</h2>
-      <p>Are you looking to sell your collection? Forever Young Records is always looking to purchase high-quality music and memorabilia. Our professional buyers are on staff during select days, ready to appraise your collection and offer you cash or store credit.</p>
-    </div>
-
-    <div class="about-image">
-      <img src="stack-2-vinyl.jpg" alt="Record Stack">
-    </div>
-
-    <div class="about-block">
-      <h2>What We're Looking For</h2>
-      <p>We purchase a massive variety of formats and genres, including:</p>
-      <ul style="margin-left: 2rem; margin-bottom: 1rem; color: var(--muted); font-size: 1.05rem; line-height: 1.6;">
-        <li>Vinyl Records (LPs & 45s)</li>
-        <li>CDs & Cassettes</li>
-        <li>Reel to Reel Tapes</li>
-        <li>Turntables and Audio Equipment</li>
-        <li>Vintage Music Posters and T-Shirts</li>
-        <li>RIAA Gold/Platinum Records and Autographs</li>
-      </ul>
-      <p>We do not typically buy most foreign language albums, classical music, or karaoke.</p>
+    <div class="map-container">
+      <iframe src="https://maps.google.com/maps?q=Forever%20Young%20Records,%202955%20S%20State%20Hwy%20161,%20Grand%20Prairie,%20TX%2075052&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </main>
 
