@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | Forever Young Records</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark: #08111F;
+      --blue: #152B4D;
+      --yellow: #FFD447;
+      --green: #2ecc71;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--dark);
+      color: #FFF8DF;
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(21,43,77,0.8) 0%, rgba(8,17,31,0) 100%);
+      z-index: 10;
+    }
+
+    .logo {
+      max-width: 150px;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 10px rgba(255, 212, 71, 0.3));
+    }
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.5rem;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 2rem;
+      z-index: 10;
+    }
+
+    /* Search Bar UI */
+    .search-panel {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      margin-bottom: 3rem;
+    }
+
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-input-wrapper {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 212, 71, 0.3);
+      color: #FFF;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-family: 'Outfit', sans-serif;
+      transition: all 0.3s;
+    }
+    
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: var(--yellow);
+      box-shadow: 0 0 15px rgba(255, 212, 71, 0.2);
+    }
+
+    select {
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FFD447' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1em;
+      padding-right: 3rem;
+    }
+
+    select option {
+      background: var(--blue);
+      color: #FFF;
+    }
+
+    button.search-btn {
+      background: var(--yellow);
+      color: var(--dark);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 700;
+    }
+
+    button.search-btn:hover {
+      background: #FFF;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 212, 71, 0.4);
+    }
+
+    /* Browse A-Z */
+    .browse-letters {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .browse-letters a {
+      color: #B6C0D7;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .browse-letters a:hover {
+      background: rgba(255, 212, 71, 0.2);
+      color: var(--yellow);
+    }
+
+    /* Results Grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .record-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .record-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      border-color: rgba(255, 212, 71, 0.3);
+    }
+
+    .record-art {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+
+    .record-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .record-info {
+      padding: 1.5rem;
+    }
+
+    .record-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      color: #FFF;
+      margin-bottom: 0.2rem;
+      line-height: 1.2;
+    }
+
+    .record-artist {
+      color: var(--yellow);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .record-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      color: #B6C0D7;
+      margin-bottom: 1.5rem;
+    }
+
+    .record-price {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      color: var(--green);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .buy-btn {
+      background: transparent;
+      border: 1px solid var(--yellow);
+      color: var(--yellow);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .buy-btn:hover {
+      background: var(--yellow);
+      color: var(--dark);
+    }
+
+    .loading-state {
+      text-align: center;
+      padding: 4rem;
+      color: #B6C0D7;
+      display: none;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 212, 71, 0.2);
+      border-top-color: var(--yellow);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/"><img src="XenoHead_logo.png" alt="Forever Young Records" class="logo"></a>
+    <h1>Our Inventory</h1>
+  </header>
+
+  <div class="container">
+    <div class="search-panel">
+      <form id="search-form" class="search-row">
+        <div class="search-input-wrapper">
+          <input type="text" id="search-query" placeholder="Search our massive inventory...">
+        </div>
+        
+        <div style="flex: 1; min-width: 150px;">
+          <select id="search-type">
+            <option value="artist">Artist Search</option>
+            <option value="title">Title Search</option>
+            <option value="label">Label Search</option>
+            <option value="genre">Genre Search</option>
+            <option value="barcode">Barcode Search</option>
+          </select>
+        </div>
+
+        <div style="flex: 1; min-width: 180px;">
+          <select id="search-format">
+            <option value="all">All Formats</option>
+            <option disabled>-----------------</option>
+            <option value="vinyl_all">All Vinyl Formats</option>
+            <option value="cd_all">All CD Formats</option>
+            <option disabled>-----------------</option>
+            <option value="vinyl_lp">Vinyl - LP</option>
+            <option value="vinyl_45">Vinyl - 45 & 7"</option>
+            <option value="vinyl_10">Vinyl - 10"</option>
+            <option value="vinyl_12">Vinyl - 12"</option>
+            <option value="vinyl_78">Vinyl - 78</option>
+            <option disabled>-----------------</option>
+            <option value="cd_single">CD Single & CD EP</option>
+            <option value="vinyl_ep">Vinyl EP & Mini LP</option>
+            <option value="cassette">Cassette</option>
+            <option value="video">Video</option>
+            <option value="book">Book</option>
+            <option value="clothing">Clothing</option>
+            <option value="memorabilia">Memorabilia</option>
+            <option value="misc">Miscellaneous</option>
+          </select>
+        </div>
+
+        <button type="submit" class="search-btn">Search</button>
+      </form>
+
+      <div class="browse-letters">
+        <span style="color: #B6C0D7; display: flex; align-items: center; margin-right: 0.5rem; font-family: 'Oswald', sans-serif;">BROWSE:</span>
+        <a href="#">#</a>
+        <a href="#">A</a><a href="#">B</a><a href="#">C</a><a href="#">D</a><a href="#">E</a>
+        <a href="#">F</a><a href="#">G</a><a href="#">H</a><a href="#">I</a><a href="#">J</a>
+        <a href="#">K</a><a href="#">L</a><a href="#">M</a><a href="#">N</a><a href="#">O</a>
+        <a href="#">P</a><a href="#">Q</a><a href="#">R</a><a href="#">S</a><a href="#">T</a>
+        <a href="#">U</a><a href="#">V</a><a href="#">W</a><a href="#">X</a><a href="#">Y</a><a href="#">Z</a>
+      </div>
+    </div>
+
+    <div id="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Digging through the crates...</p>
+    </div>
+
+    <div id="results" class="results-grid">
+      <!-- Example Mockup Card (Will be replaced by JS) -->
+      <div class="record-card">
+        <div class="record-art">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+        </div>
+        <div class="record-info">
+          <div class="record-title">The Dark Side of the Moon</div>
+          <div class="record-artist">Pink Floyd</div>
+          <div class="record-details">
+            <div><strong>Format:</strong> Vinyl - LP</div>
+            <div><strong>Condition:</strong> Near Mint (NM)</div>
+            <div><strong>Label:</strong> Harvest</div>
+          </div>
+          <div class="record-price">
+            $35.00
+            <button class="buy-btn">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('results').style.display = 'none';
+
+      // TODO: Connect to Cloudflare Worker proxy
+      // Mock loading delay
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('results').style.display = 'grid';
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
