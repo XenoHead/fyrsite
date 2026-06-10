@@ -126,7 +126,7 @@
     HERO
     ========================= */
     .hero {
-      min-height: 100vh;
+      height: 100vh;
       position: relative;
       display: flex;
       align-items: center;
@@ -141,11 +141,12 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(8, 17, 31, 0.55), rgba(8, 17, 31, 0.82)),
-        url('juke-wall.png');
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
+        url('images/juke-box-1-removebg-1.png'),
+        linear-gradient(rgba(8, 17, 31, 0.65), rgba(8, 17, 31, 0.85)),
+        url('images/brick-bg.png');
+      background-size: contain, auto, cover;
+      background-position: center, center, center;
+      background-repeat: no-repeat, repeat, repeat;
     }
 
     @keyframes slowZoom {
@@ -175,27 +176,29 @@
       z-index: 2;
       max-width: 900px;
       text-align: center;
-      padding: 2rem;
+      padding: 0 2rem;
       animation: fadeUp 1.2s ease forwards;
     }
 
     .hero-logo {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     .hero-logo img {
-      width: min(350px, 80vw);
+      width: auto;
+      max-width: 80vw;
+      max-height: 25vh;
       object-fit: contain;
       filter: drop-shadow(0 0 18px rgba(255, 212, 71, 0.15));
     }
 
     .hero-content p {
       color: var(--cream);
-      font-size: 1.15rem;
-      line-height: 1.5;
+      font-size: clamp(0.9rem, 2vh, 1.15rem);
+      line-height: 1.4;
       letter-spacing: 0.3px;
       max-width: 720px;
-      margin: auto auto 1.5rem;
+      margin: 0 auto 1rem;
       text-shadow: 0 0 20px rgba(0, 0, 0, 0.45);
     }
 
@@ -236,6 +239,28 @@
     }
 
     /* =========================
+    SEARCH BEVEL
+    ========================= */
+    .search-bevel {
+      border: 2px outset rgba(255, 212, 71, 0.5);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0 auto 1rem auto;
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+    }
+
+    .search-bevel legend {
+      font-family: 'Oswald', sans-serif;
+      color: var(--yellow);
+      padding: 0 10px;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* =========================
     FEATURE NAV
     ========================= */
     .feature-nav {
@@ -264,16 +289,16 @@
     }
 
     .front-store-info {
-      margin-top: 2.5rem;
+      margin-top: 1.5rem;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       gap: 1.5rem;
-      font-size: 0.95rem;
+      font-size: clamp(0.8rem, 1.8vh, 0.95rem);
       background: rgba(0, 0, 0, 0.45);
-      padding: 1.5rem 2rem;
+      padding: 1rem 1.5rem;
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.06);
       backdrop-filter: blur(8px);
@@ -433,11 +458,11 @@
   <nav>
     <div class="nav-inner">
       <div class="logo">
-        <img src="fyr-logo-removebg-preview.png" alt="Forever Young Records">
+        <img src="images/fyr-logo-removebg-preview.png" alt="Forever Young Records">
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="shop.html">Shop Online</a>
+
         <a href="buying-hours.html">Buying Hours</a>
         <a href="location.html">Location</a>
         <a href="about.html">About</a>
@@ -450,16 +475,20 @@
     <div class="hero-image"></div>
     <div class="hero-content">
       <div class="hero-logo neon">
-        <img src="fyr-logo-removebg-preview.png" alt="Forever Young Records">
+        <img src="images/fyr-logo-removebg-preview.png" alt="Forever Young Records">
       </div>
       <p>
         A legendary archive of music culture.
         Vinyl, memorabilia, rare pressings,
         and generations of American sound.
       </p>
-      <div class="hero-buttons">
-        <a href="shop.html" class="button primary" style="padding: 1.2rem 2.5rem; font-size: 1.1rem;">Search For Music To Buy</a>
-      </div>
+      <fieldset class="search-bevel">
+        <legend>Search For Music To Buy</legend>
+        <div class="hero-buttons" style="margin-bottom: 0;">
+          <a href="shop.html" class="button primary" style="padding: 1rem 1.8rem; font-size: 1rem;">Online Product</a>
+          <a href="instore-product.html" class="button primary" style="padding: 1rem 1.8rem; font-size: 1rem; background: var(--blueBright); border-color: var(--blueBright); color: white;">In Store Product</a>
+        </div>
+      </fieldset>
       <div class="feature-nav">
         <a href="#" class="feature-link">AISLE GPS</a>
         <a href="#" class="feature-link">CRATE DIGGING</a>
@@ -489,7 +518,7 @@
       </div>
       <div class="xeno-credit">
         <a href="https://www.xenohead.com" target="_blank">
-          <img src="xenoHead_logo.png" alt="XenoHead">
+          <img src="images/XenoHead_logo.png" alt="XenoHead" style="height: 50px; border-radius: 4px;">
           <span>WebDev: www.xenohead.com</span>
         </a>
       </div>
@@ -520,3 +549,4 @@
   </script>
 </body>
 </html>
+

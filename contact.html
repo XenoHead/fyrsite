@@ -297,11 +297,19 @@
       max-width: 660px;
       /* Restrict max width so the Facebook plugin (max 500px) fills the screen perfectly */
       aspect-ratio: 1.1 / 1;
-      background-image: url('tv-0.webp');
+      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.5));
+    }
+
+    .tv-physical-wrapper::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('images/tv-0.png');
       background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
-      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.5));
+      pointer-events: none;
+      z-index: 20;
     }
 
     .tv-controls {
@@ -514,7 +522,7 @@
   <nav>
     <div class="nav-inner">
       <div class="logo">
-        <a href="index.html"><img src="fyr-logo-removebg-preview.png" alt="Forever Young Records"></a>
+        <a href="index.html"><img src="images/fyr-logo-removebg-preview.png" alt="Forever Young Records"></a>
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
@@ -527,7 +535,7 @@
   </nav>
 
   <header class="top-store-info">
-    <h1>Forever Young Records</h1>
+    <img src="images/fyr-sign-front.png" alt="Forever Young Records" style="max-width: 90%; height: auto; max-height: 140px; margin-bottom: 1.5rem;">
     <div class="info-details">
       <span>2955 S State Hwy 161, Grand Prairie, TX 75052</span>
       <span><strong>Phone:</strong> (972) 260-9899</span>
@@ -621,6 +629,13 @@
       document.getElementById('feed-' + channel).classList.add('active');
     }
   </script>
+  <div style="width: 100%; display: flex; justify-content: center; align-items: center; padding: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.05); background: rgba(0, 0, 0, 0.18); margin-top: auto;">
+    <a href="https://www.xenohead.com" target="_blank" style="display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: #BFC7DA; font-size: 0.82rem; letter-spacing: 1px; transition: 0.3s ease;">
+      <img src="images/XenoHead_logo.png" alt="XenoHead" style="height: 50px; border-radius: 4px;">
+      <span>WebDev: www.xenohead.com</span>
+    </a>
+  </div>
 </body>
 
 </html>
+
