@@ -1,0 +1,62 @@
+I will check the recent git commit logs for both the customer and staff repositories to see what commits were made and when.
+
+Ran command: `git log -n 5 --oneline`
+
+I will list the deployment history for the customer and staff Cloudflare Pages projects using the Wrangler CLI. This will show us the exact status of recent builds, whether they were triggered by GitHub commits, and if any of them failed.
+
+Ran command: `npx wrangler pages deployment list --project-name foreveryoung`
+
+I will capture the full output of the wrangler deployment list to a temporary text file so I can examine the most recent builds without truncation.
+
+Ran command: `npx wrangler pages deployment list --project-name foreveryoung > C:\Users\Scott\.gemini\antigravity-ide\brain\326ab68d-fb89-4526-93d4-8655b1127f53/scratch/deploy_list_customer.txt`
+
+I will redirect the output to the root of the artifact directory where we have write access.
+
+Ran command: `npx wrangler pages deployment list --project-name foreveryoung > C:\Users\Scott\.gemini\antigravity-ide\brain\326ab68d-fb89-4526-93d4-8655b1127f53\deploy_list_customer.txt`
+
+I will view the contents of the generated deployment file to analyze recent build events.
+
+I will run the wrangler command again, using PowerShell's `Select-Object -First 15` to display only the top 15 rows of the deployment table, which shows the most recent deployments.
+
+Ran command: `npx wrangler pages deployment list --project-name foreveryoung | Select-Object -First 15`
+
+I will check the deployment list for the staff portal as well to see what recent commits were deployed.
+
+Ran command: `npx wrangler pages deployment list --project-name staff-foreveryoung | Select-Object -First 15`
+
+I will check if there is a wrangler command to list project details, which will tell us if these projects are configured as Git-connected or Direct Upload.
+
+Ran command: `npx wrangler pages project list`
+
+I ran a check on the configuration of both of your Cloudflare Pages projects using `npx wrangler pages project list`, and I found the exact reason:
+
+### The Reason:
+**Your Cloudflare Pages projects are configured as "Direct Upload" projects, not "Git-connected" projects.**
+
+Here is the project status showing this:
+```
+┌────────────────────┬───────────────────────────────────────────────────────────────┬──────────────┬───────────────┐
+│ Project Name       │ Project Domains                                               │ Git Provider │ Last Modified │
+├────────────────────┼───────────────────────────────────────────────────────────────┼──────────────┼───────────────┤
+│ foreveryoung       │ foreveryoung-3tr.pages.dev, foreveryoung.xenohead.com         │ No           │ 5 minutes ago │
+├────────────────────┼───────────────────────────────────────────────────────────────┼──────────────┼───────────────┤
+│ staff-foreveryoung │ staff-foreveryoung.pages.dev, staff.foreveryoung.xenohead.com │ No           │ 5 minutes ago │
+└────────────────────┴───────────────────────────────────────────────────────────────┴──────────────┴───────────────┘
+```
+
+Notice the **`Git Provider: No`** column. 
+
+### How this configuration works:
+1. **GitHub** is serving as your code backup/collaboration repository (which is great to keep your code safe and track version history).
+2. **Cloudflare Pages** is unaware of GitHub pushes because there is no Git webhook or webhook credentials linked to build your project from GitHub.
+3. Because of this, pushing commits to GitHub **does not trigger deployments**.
+4. The live sites are updated **exclusively** when a manual deploy is triggered from the command line using the Wrangler CLI (which pushes the local directory directly to Cloudflare Pages):
+   * **For Customer site:** `npx wrangler pages deploy . --project-name foreveryoung --branch main --commit-dirty=true`
+   * **For Staff site:** `npx wrangler pages deploy . --project-name staff-foreveryoung --branch main --commit-dirty=true`
+
+### How to get automatic deploys from GitHub (Optional)
+If you want pushing to GitHub to automatically update the live site, we have two options:
+1. **Option A (Cloudflare Git Integration):** We can log into your Cloudflare Dashboard, go to your Pages project settings, and connect it to your GitHub repository. (Cloudflare will handle builds on their servers).
+2. **Option B (GitHub Actions):** We can create a GitHub Action workflow file (e.g. `.github/workflows/deploy.yml`) in the repositories, which runs `wrangler pages deploy` automatically every time you push to the `main` branch. 
+
+Let me know if you would like me to set up a GitHub Actions workflow (Option B) for you!
